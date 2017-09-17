@@ -6,7 +6,7 @@ const sequelize = require(path.join(config.path.lib, 'LibDb'))
 
 module.exports = () => {
   return async (ctx, next) => {
-    if (db) {
+    if (sequelize) {
       ctx.model = sequelize.models
       ctx.sequelize = sequelize
     }

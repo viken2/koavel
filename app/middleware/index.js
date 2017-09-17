@@ -13,7 +13,7 @@ module.exports = compose([
   error,
   body,
   cache,
-  //model,
+  model,
   kcors,
   output,
   router.routes(),
