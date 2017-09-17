@@ -35,7 +35,8 @@
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "nodemailer": "^4.1.0",
-    "sequelize": "^4.8.4"
+    "sequelize": "^4.8.4",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "standard": "^10.0.3"

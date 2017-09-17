@@ -37,14 +37,14 @@ const config = {
     }
   },
   mail: {
-    host: 'mail.xunlei.com',
+    host: '',
     port: 25,
     secure: false,
-    user: 'xl_ad_admin@xunlei.com',
-    pass: 'efFR8275CXck',
-    from: '"迅雷广告" <xl_ad_admin@xunlei.com>',
+    user: '',
+    pass: '',
+    from: '"',
     err_title: 'Koaval报警', // 错误告警邮件title
-    err_noticer: ['longshuiyu@xunlei.com'], // 错误告警通知接收者
+    err_noticer: [], // 错误告警通知接收者
   }
 }
 

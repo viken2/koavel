@@ -14,6 +14,7 @@ module.exports = {
       common: path.join(appPath, 'models', 'common'), // 支持多个DB，默认common
     },
     middleware: path.join(appPath, 'middleware'),
+    log: path.join(rootPath, 'storage', 'logs'),
     view: path.join(appPath, 'views'),
   }
 }

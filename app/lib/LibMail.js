@@ -26,15 +26,15 @@ const mail = {
    * @param {string|array} to
    * @param {string} subject
    * @param {string} content
-   * @param {boolean} [sync=false] 是否同步，默认false-表示异步
+   * @param {boolean} [queue=false] 是否使用队列，默认false不进入队列
    * @returns
    */
-  sendMail (to, subject, content, sync = false) {
+  sendMail (to, subject, content, queue = false) {
     if (typeof to === 'object') {
       to = Array.from(to).join(', ')
     }
 
-    if (sync) { // 同步
+    if (queue) { // 同步
       subject = config.env === 'production' ? subject : (subject + '【' + envMap[config.env] + '】')
       return transporter.sendMail({
         from: config.mail.from,
@@ -56,10 +56,10 @@ const mail = {
    * @param {string} level 级别
    * @param {string} title 标题
    * @param {string} message 描述
-   * @param {boolean} [sync=false] 是否同步，默认false-表示异步
+   * @param {boolean} [queue=false] 是否使用队列，默认false不进入队列
    * @returns
    */
-  errorNotify (level, title, message, sync = false) {
+  errorNotify (level, title, message, queue = false) {
     let color = 'red'
     switch (level) {
       case 'warning':
@@ -118,7 +118,7 @@ const mail = {
         '<p><span>详细内容：</span></p>' +
         '<p>'+ content +'</p>'
 
-    return this.sendMail(config.mail.err_noticer, config.mail.err_title, html, sync)
+    return this.sendMail(config.mail.err_noticer, config.mail.err_title, html, queue)
   }
 }
 
