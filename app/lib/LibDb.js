@@ -5,18 +5,14 @@ const fs = require('fs')
 const path = require('path')
 const config = process.appConfig
 
-module.exports = () => {
-  if (dbConfig.dialect === '') {
-    return null
-  }
-
+let sequelize = null
+if (config.db.dialect !== '') {
   const modelPath = config.path.model.common
-  const dbConfig = dbConfig[dbConfig.dialect]
-
-  const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
+  const dbConfig = config.db[config.db.dialect]
+  sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
     logging: config.env !== 'production' ? console.log : false,
     host: dbConfig.host,
-    dialect: dbConfig.dialect,
+    dialect: config.db.dialect,
     port: dbConfig.port,
     pool: {
       max: 100,
@@ -34,13 +30,13 @@ module.exports = () => {
       charset: 'UTF-8',
     }
   })
-
+  
   fs.readdir(modelPath, (err, files) => {
     for (let file of files) {
       const modelFile = path.join(modelPath, file)
       sequelize.import(modelFile)
     }
   })
-
-  return sequelize
 }
+
+module.exports = sequelize

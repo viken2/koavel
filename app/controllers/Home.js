@@ -2,9 +2,10 @@
 
 module.exports = {
   index(ctx, next) {
-    ctx.body = 'welcome to koavel'
+    ctx.body = 'welcome to koavel ' + process.pid
   },
-  json(ctx, next) {
+  async json(ctx, next) {
+    // await ..
     ctx.success('welcome to koaval')
   }
 }

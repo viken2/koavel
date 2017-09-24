@@ -35,7 +35,7 @@
         "NODE_CONFIG_STRICT_MODE": true,
         "PORT": 3128
       },
-      "instances": 4,
+      "instances": 0,
       "max_memory_restart": "500M",
       "exec_mode": "cluster"
     },

@@ -1,22 +1,36 @@
 'use strict'
 
+const redis = {
+  port: 6381,
+  host: '127.0.0.1',
+  password: ''
+}
+
+const mysql = {
+  host: '127.0.0.1',
+  port: '3306',
+  username: '',
+  password: ''
+}
+
 const config = {
   db: {
     dialect: 'mysql',
     mysql: {
-      host: '127.0.0.1',
-      port: '3306',
-      database: 'koavel',
-      username: 'proxy',
-      password: 'proxy'
+      host: mysql.host,
+      port: mysql.port,
+      database: '',
+      username: mysql.username,
+      password: mysql.password
     }
   },
   cache: {
     default: 'redis',
     redis: {
-      port: 6381,
-      host: '127.0.0.1',
-      password: ''
+      port: redis.port,
+      host: redis.host,
+      password: redis.password,
+      db: 0
     },
     memcache: {}
   },
@@ -26,12 +40,9 @@ const config = {
   queue: {
     prefix: 'koavel:',
     redis: {
-      // port: this.cache.redis.port,
-      // host: this.cache.redis.host,
-      // auth: this.cache.redis.password,
-      port: 6381,
-      host: '127.0.0.1',
-      password: '',
+      port: redis.port,
+      host: redis.host,
+      password: redis.password,
       db: 2,
       options: {}
     }
