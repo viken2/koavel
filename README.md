@@ -1,6 +1,36 @@
 # Koavel
 基于koa2，打造一个可以快速二次开发的node框架 
 
+## 目录结构
+```node
+├── app
+│   ├── controllers
+│   ├── lib
+│   ├── middleware
+│   ├── models
+│   └── views
+├── app.js
+├── benchmarks
+├── config
+│   ├── app.js
+│   ├── env
+│   └── index.js
+├── docs
+├── LICENSE
+├── package.json
+├── queue.js
+├── README.md
+├── routes
+│   ├── api.js
+│   ├── app.js
+│   └── index.js
+├── server.json
+├── storage
+│   ├── logs
+│   └── pm2
+└── tests
+```
+
 ## 启动方式
 
 * 开发环境
