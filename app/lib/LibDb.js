@@ -5,11 +5,11 @@ const fs = require('fs')
 const path = require('path')
 const config = process.appConfig
 
-let sequelize = null
+let db = null
 if (config.db.dialect !== '') {
   const modelPath = config.path.model.common
   const dbConfig = config.db[config.db.dialect]
-  sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
+  db = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
     logging: config.env !== 'production' ? console.log : false,
     host: dbConfig.host,
     dialect: config.db.dialect,
@@ -33,10 +33,13 @@ if (config.db.dialect !== '') {
   
   fs.readdir(modelPath, (err, files) => {
     for (let file of files) {
+      if (file === '.gitignore') {
+        continue
+      }
       const modelFile = path.join(modelPath, file)
-      sequelize.import(modelFile)
+      db.import(modelFile)
     }
   })
 }
 
-module.exports = sequelize
+module.exports = db

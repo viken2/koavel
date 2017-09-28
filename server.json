@@ -15,7 +15,7 @@
       "watch_options": {
         "followSymlinks": false
       },
-      "kill_timeout": 3000,
+      "kill_timeout": 5000,
       "error_file": "storage/pm2/app_err.log",
       "out_file": "storage/pm2/app_out.log",
       "merge_logs": true,
@@ -54,7 +54,7 @@
       "watch_options": {
         "followSymlinks": false
       },
-      "kill_timeout": 3000,
+      "kill_timeout": 5000,
       "error_file": "storage/pm2/queue_err.log",
       "out_file": "storage/pm2/queue_out.log",
       "merge_logs": true,
@@ -73,7 +73,7 @@
       },
       "instances": 1,
       "max_memory_restart": "1024M",
-      "exec_mode": "fork"
+      "exec_mode": "cluster"
     }
   ]
 }

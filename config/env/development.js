@@ -1,8 +1,8 @@
 'use strict'
 
 const redis = {
-  port: 6381,
   host: '127.0.0.1',
+  port: 6379,
   password: ''
 }
 
@@ -15,17 +15,17 @@ const mysql = {
 
 const config = {
   db: {
-    dialect: 'mysql',
+    dialect: '', // 开启则需要配置 mysql
     mysql: {
       host: mysql.host,
       port: mysql.port,
-      database: '',
+      database: '', // 数据库名
       username: mysql.username,
       password: mysql.password
     }
   },
   cache: {
-    default: 'redis',
+    default: '', // 开启则需要配置 redis
     redis: {
       port: redis.port,
       host: redis.host,

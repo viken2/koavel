@@ -1,8 +1,8 @@
 'use strict'
 
 module.exports = {
-  index(ctx, next) {
-    ctx.body = 'welcome to koavel ' + process.pid
+  async index(ctx, next) {
+    ctx.body = 'welcome to koavel'
   },
   async json(ctx, next) {
     // await ..
