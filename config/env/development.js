@@ -21,7 +21,8 @@ const config = {
       port: mysql.port,
       database: '', // 数据库名
       username: mysql.username,
-      password: mysql.password
+      password: mysql.password,
+      sql_mode: ['NO_ENGINE_SUBSTITUTION']
     }
   },
   cache: {

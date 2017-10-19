@@ -30,7 +30,11 @@ if (config.db.dialect !== '') {
       charset: 'UTF-8',
     }
   })
-  
+
+  sequelize.addHook('afterConnect', (connection, config) => {
+    connection.query('set SESSION sql_mode="' + dbConfig.sql_mode.join(',') + '"', (error, results) => {})
+  })
+
   fs.readdir(modelPath, (err, files) => {
     for (let file of files) {
       if (file === '.gitignore') {
