@@ -1,0 +1,25 @@
+{
+  "apps": [
+    {
+      "name": "api-tag-mp-m",
+      "script": "./app.js",
+      "watch": true,
+      "ignore_watch": [
+        "node_modules",
+        "log",
+        "test"
+      ],
+      "watch_options": {
+        "followSymlinks": false
+      },
+      "kill_timeout": 5000,
+      "error_file": "log/pm2_err.log",
+      "out_file": "log/pm2_out.log",
+      "merge_logs": true,
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "instances": 2,
+      "max_memory_restart": "200M",
+      "exec_mode": "cluster"
+    }
+  ]
+}
