@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": ["es6", "dom"],
+        "types": ["mocha", "reflect-metadata"],
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "sourceMap": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": false,
+        "noResolve": false,
+        "noUnusedParameters": false,
+        "noUnusedLocals": true,
+        "strictNullChecks": true,
+    },
+    "exclude": [
+        "logs",
+        "src/log",
+        "node_modules/*"
+    ],
+    "typedocOptions": {
+        "mode": "modules",
+        "out": "docs"
+    }
+}
