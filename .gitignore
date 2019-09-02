@@ -62,7 +62,8 @@ test/**/*.js.map
 src/**/*.js.map
 src/*.js.map
 
-src/.env
+src/env.json
+doc/env/env.development.json
 
 .idea/
 .vscode/

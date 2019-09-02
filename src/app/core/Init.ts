@@ -4,6 +4,7 @@ import * as Router from 'koa-router';
 import { map as routerMap } from '../../router/index';
 import { Context } from 'koa';
 import BaseError from './BaseError';
+import config from '../../config/config';
 
 const errorHandler = (app: any) => {
   app.use(async (ctx: Context, next: Function) => {
@@ -28,8 +29,8 @@ const initRouter = (app: any) => {
     keys.forEach(key => {
       const [method, route] = key.split(' ')
       const [controllerName, fun] = value[key].split('@')
-      const controllerFile = path.join(path.resolve(), 'src/app/controller', prefix, controllerName + '.ts');
-      if (!fs.existsSync(controllerFile)) {
+      const controllerFile = path.join(config.root, 'app/controller', prefix, controllerName);
+      if (!fs.existsSync(`${controllerFile}.js`) && !fs.existsSync(`${controllerFile}.ts`)) {
         return;
       }
 
