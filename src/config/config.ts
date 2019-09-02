@@ -2,6 +2,7 @@ import path = require("path");
 import fs = require("fs");
 
 interface Config {
+  key: string,
   port: number,
   env: string,
   root: string,
@@ -19,9 +20,10 @@ if (!fs.existsSync(envFile)) {
 const env = require(envFile);
 
 let config: Config = {
+  key: env.env + '-' + '2d4ad894fe346a31a7c291d57f28b3a6',
   root,
   port: env.port,
-  env: env.evn,
+  env: env.env,
 };
 
 config.log = {

@@ -51,6 +51,8 @@
     "switch-default": false,
     "trailing-comma": false,
     "typedef": false,
-    "variable-name": false
+    "variable-name": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false
   }
 }

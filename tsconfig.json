@@ -5,7 +5,7 @@
         "types": ["mocha", "reflect-metadata"],
         "outDir": "./dist",
         "rootDir": "./src",
-        "sourceMap": false,
+        "sourceMap": true,
         "module": "commonjs",
         "moduleResolution": "node",
         "experimentalDecorators": true,

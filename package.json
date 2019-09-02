@@ -36,6 +36,7 @@
   },
   "homepage": "https://github.com/viken2/koavel#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "inversify": "^5.0.1",
     "ioredis": "^4.14.0",
     "koa": "^2.8.1",
@@ -44,6 +45,8 @@
     "mysql2": "^1.7.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^5.17.0",
+    "tslint": "^5.19.0",
+    "typescript": "^3.6.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {

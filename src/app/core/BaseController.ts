@@ -1,6 +1,7 @@
 import BaseError from './BaseError';
 import { Context } from 'koa';
 import logger from '../lib/LibLog';
+import { ERR_MSG, OK } from '../../config/code';
 
 class BaseController {
   public ctx: any;
@@ -12,11 +13,12 @@ class BaseController {
     this.ctx.logger = logger;
   }
 
-  throw (message: string, code: number) {
+  throw (code: number, message = '') {
+    message = message ? message : ERR_MSG[code];
     this.error(code, message);
 
     const error: BaseError = new BaseError();
-    error.code = code || 500;
+    error.code = code;
     error.message = message;
     throw error;
   }
@@ -24,7 +26,7 @@ class BaseController {
   success(data: any) {
     this.ctx.status = 200;
     this.ctx.body = {
-      code: 200,
+      code: OK,
       data,
     };
   }
@@ -33,7 +35,7 @@ class BaseController {
     this.ctx.status = 200;
     this.ctx.body = {
       code: code,
-      error: msg,
+      error: msg ? msg : ERR_MSG[code],
     };
   }
 

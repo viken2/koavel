@@ -6,7 +6,7 @@ class TestApi extends ApiController {
   }
 
   async save() {
-    this.error(200, 'fuckyou')
+    this.success('save');
   }
 }
 

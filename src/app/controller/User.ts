@@ -1,22 +1,27 @@
 import BaseController from "../core/BaseController";
-import * as UserModel from '../model/User';
+import * as UserModel from "../model/User";
+import bcrypt = require('bcrypt');
 
 class User extends BaseController {
-  async info() {
+  public async info() {
     const user = await UserModel.User.findOne({
       where: {
-        email: 'admin@xunlei.com',
+        email: 'admin@testcom',
       },
       attributes: ['id', 'email', 'password', 'status']
     });
-    this.ctx.body = user;
+    this.success(user);
   }
 
-  async add() {
+  public async add() {
+    const saltRounds = 10
+    const salt = bcrypt.genSaltSync(saltRounds)
+    const hash = bcrypt.hashSync('123456', salt)
+
     const user = await UserModel.User.create({
       name: '测试用户',
       email: 'test@test.com',
-      password: '123456',
+      password: hash,
       phone: '123',
       true_name: 'haha',
       description: '',
@@ -24,8 +29,7 @@ class User extends BaseController {
       status: UserModel.STATUS_ON,
     });
     this.ctx.logger.info(user.id)
-    // this.ctx.body = user;
-    this.throw('fuckyou', 502);
+    this.success(user);
   }
 }
 

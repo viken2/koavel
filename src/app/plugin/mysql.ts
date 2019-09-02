@@ -23,6 +23,10 @@ const Mysql = new Sequelize(config.mysql.name, config.mysql.user, config.mysql.p
   }
 });
 
+Mysql.addHook('afterConnect', (connection: any) => {
+  connection.query('set SESSION sql_mode="' + config.mysql.sqlmode + '"');
+});
+
 export {
   Mysql
 }

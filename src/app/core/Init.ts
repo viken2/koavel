@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as Router from 'koa-router';
 import { map as routerMap } from '../../router/index';
 import { Context } from 'koa';
+import bodyParser = require('koa-bodyparser');
 import BaseError from './BaseError';
 import config from '../../config/config';
 
@@ -12,7 +13,7 @@ const errorHandler = (app: any) => {
       ctx.status = 200;
       ctx.body = {
         code: e.code,
-        error: '系统升级中，请稍后再试',
+        error: e.message,
       };
       if (!e.code || e.code >= 500) {
         app.emit('error', e);
@@ -20,6 +21,10 @@ const errorHandler = (app: any) => {
     })
   })
 }
+
+const initBase = (app: any) => {
+  app.use(bodyParser());
+};
 
 const initRouter = (app: any) => {
   const router = new Router();
@@ -50,6 +55,7 @@ const initRouter = (app: any) => {
 
 const initFun = (app: any): void => {
   errorHandler(app);
+  initBase(app);
   initRouter(app);
 }
 
