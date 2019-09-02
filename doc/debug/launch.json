@@ -7,12 +7,15 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "node 调试",
-      "program": "${workspaceFolder}/dist/app.js",
-      "preLaunchTask": "tsc: build - tsconfig.json",
+      "name": "ts调试",
+      "program": "${workspaceFolder}/src/app.ts",
+      "cwd": "${workspaceFolder}",
+      "sourceMaps": true,
       "outFiles": [
-        "${workspaceFolder}/dist/**/*.js"
-      ]
+          "${workspaceFolder}/dist/**/*.js"
+      ],
+      "preLaunchTask": "npm: build-ts",
+      "protocol": "inspector"
     }
   ]
 }
