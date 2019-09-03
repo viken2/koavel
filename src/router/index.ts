@@ -7,4 +7,4 @@ map.set(api.prefix, api.router);
 
 export {
   map
-}
+};

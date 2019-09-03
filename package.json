@@ -39,14 +39,13 @@
     "bcrypt": "^3.0.6",
     "inversify": "^5.0.1",
     "ioredis": "^4.14.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.8.1",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "mysql2": "^1.7.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^5.17.0",
-    "tslint": "^5.19.0",
-    "typescript": "^3.6.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {
@@ -61,6 +60,9 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.2",
     "@types/sequelize": "^4.28.4",
-    "@types/validator": "^10.11.3"
+    "@types/validator": "^10.11.3",
+    "tslint": "^5.19.0",
+    "tslint-config-alloy": "^0.2.1",
+    "typescript": "^3.6.2"
   }
 }

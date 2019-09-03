@@ -1,7 +1,17 @@
 import { Model, DataTypes } from 'sequelize';
 import { Mysql } from '../plugin/mysql';
 
-class User extends Model {
+class UserModel extends Model {
+  public static statusPending = 1;
+  public static statusOn = 2;
+  public static statusOff = 3;
+
+  public static statusMap = {
+    [UserModel.statusPending]: '待审核',
+    [UserModel.statusPending]: '正常',
+    [UserModel.statusPending]: '禁用',
+  };
+
   public id!: number;
   public name!: string;
   public email!: string;
@@ -16,61 +26,52 @@ class User extends Model {
   public readonly updated_at!: Date;
 }
 
-export const STATUS_PENDING = 1;
-export const STATUS_ON = 2;
-export const STATUS_OFF = 3;
-export const statusMap = {
-  [STATUS_PENDING]: '待审核',
-  [STATUS_ON]: '正常',
-  [STATUS_OFF]: '禁用',
-}
+const LEN = 128;
 
-User.init({
+UserModel.init({
   id: {
     type: DataTypes.INTEGER.UNSIGNED,
     autoIncrement: true,
     primaryKey: true,
   },
   name: {
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.STRING(LEN),
     allowNull: false,
   },
   email: {
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.STRING(LEN),
     allowNull: false,
   },
   password: {
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.STRING(LEN),
     allowNull: false,
   },
   phone: {
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.STRING(LEN),
     allowNull: false,
   },
   true_name: {
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.STRING(LEN),
     allowNull: false,
   },
   description: {
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.STRING(LEN),
     allowNull: false,
   },
   login_ip: {
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.STRING(LEN),
     allowNull: false,
   },
   status: {
     type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
-      isIn: [Object.keys(statusMap)],
-    }
-  }
+      isIn: [Object.keys(UserModel.statusMap)],
+    },
+  },
 }, {
   tableName: 'users',
   sequelize: Mysql,
 });
 
-export {
-  User
-}
+export default UserModel;

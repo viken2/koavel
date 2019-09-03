@@ -13,5 +13,5 @@ export default {
 
   mysql: {
     enable: true,
-  }
-}
+  },
+};

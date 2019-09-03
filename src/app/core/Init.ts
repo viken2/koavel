@@ -6,21 +6,23 @@ import { Context } from 'koa';
 import bodyParser = require('koa-bodyparser');
 import BaseError from './BaseError';
 import config from '../../config/config';
+import { HTTP_OK, HTTP_ERROR } from '../../config/code';
 
 const errorHandler = (app: any) => {
   app.use(async (ctx: Context, next: Function) => {
     await next().catch((e: BaseError) => {
-      ctx.status = 200;
+      ctx.status = HTTP_OK;
       ctx.body = {
         code: e.code,
         error: e.message,
       };
-      if (!e.code || e.code >= 500) {
+
+      if (!e.code || e.code >= HTTP_ERROR) {
         app.emit('error', e);
       }
-    })
-  })
-}
+    });
+  });
+};
 
 const initBase = (app: any) => {
   app.use(bodyParser());
@@ -31,9 +33,9 @@ const initRouter = (app: any) => {
   routerMap.forEach((value: any, key: string) => {
     const prefix = key === '/' ? '' : key;
     const keys = Object.keys(value);
-    keys.forEach(key => {
-      const [method, route] = key.split(' ')
-      const [controllerName, fun] = value[key].split('@')
+    keys.forEach((key: string) => {
+      const [method, route] = key.split(' ');
+      const [controllerName, fun] = value[key].split('@');
       const controllerFile = path.join(config.root, 'app/controller', prefix, controllerName);
       if (!fs.existsSync(`${controllerFile}.js`) && !fs.existsSync(`${controllerFile}.ts`)) {
         return;
@@ -47,18 +49,18 @@ const initRouter = (app: any) => {
         }
         return Reflect.apply(controller[fun], controller, [ctx]);
       }]);
-    })
+    });
   });
 
   app.use(router.routes()).use(router.allowedMethods());
-}
+};
 
 const initFun = (app: any): void => {
   errorHandler(app);
   initBase(app);
   initRouter(app);
-}
+};
 
 export {
   initFun,
-}
+};

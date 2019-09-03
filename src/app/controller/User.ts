@@ -1,24 +1,25 @@
-import BaseController from "../core/BaseController";
-import * as UserModel from "../model/User";
+import BaseController from '../core/BaseController';
+import UserModel from '../model/User';
 import bcrypt = require('bcrypt');
 
-class User extends BaseController {
+class UserController extends BaseController {
   public async info() {
-    const user = await UserModel.User.findOne({
+    const user = await UserModel.findOne({
       where: {
-        email: 'admin@testcom',
+        email: 'admin@test.com',
       },
-      attributes: ['id', 'email', 'password', 'status']
+      attributes: ['id', 'email', 'password', 'status'],
     });
+
     this.success(user);
   }
 
   public async add() {
-    const saltRounds = 10
-    const salt = bcrypt.genSaltSync(saltRounds)
-    const hash = bcrypt.hashSync('123456', salt)
+    const saltRounds = 10;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync('123456', salt);
 
-    const user = await UserModel.User.create({
+    const user = await UserModel.create({
       name: '测试用户',
       email: 'test@test.com',
       password: hash,
@@ -26,11 +27,11 @@ class User extends BaseController {
       true_name: 'haha',
       description: '',
       login_ip: '11',
-      status: UserModel.STATUS_ON,
+      status: UserModel.statusPending
     });
-    this.ctx.logger.info(user.id)
+    this.ctx.logger.info(user.id);
     this.success(user);
   }
 }
 
-module.exports = User;
+module.exports = UserController;

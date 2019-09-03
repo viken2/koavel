@@ -10,7 +10,7 @@ const Mysql = new Sequelize(config.mysql.name, config.mysql.user, config.mysql.p
   pool: {
     max: 100,
     min: 1,
-    idle: 10000
+    idle: 10000,
   },
   timezone: '+08:00',
   define: {
@@ -20,7 +20,7 @@ const Mysql = new Sequelize(config.mysql.name, config.mysql.user, config.mysql.p
     createdAt: 'created_at',
     updatedAt: 'updated_at',
     charset: 'UTF-8',
-  }
+  },
 });
 
 Mysql.addHook('afterConnect', (connection: any) => {
@@ -29,4 +29,4 @@ Mysql.addHook('afterConnect', (connection: any) => {
 
 export {
   Mysql
-}
+};

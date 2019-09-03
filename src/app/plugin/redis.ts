@@ -7,4 +7,4 @@ redis.select(0);
 
 export {
   redis
-}
+};

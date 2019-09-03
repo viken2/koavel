@@ -1,3 +1,6 @@
+export const HTTP_OK: number = 200; // OK
+export const HTTP_ERROR: number = 500; // 500错误
+
 export const OK: number = 200; // OK
 export const INVALID_ARGUMENT: number = 400; // 无效参数
 export const UNAUTHENTICATED: number = 401; // 身份验证失败
@@ -12,16 +15,16 @@ export const UNAVAILABLE: number = 503; // 	服务不可用
 export const DEADLINE_EXCEEDED: number = 504; // 超出请求时限
 
 export const ERR_MSG = {
-  [OK]: "OK",
-  [INVALID_ARGUMENT]: "无效参数",
-  [UNAUTHENTICATED]: "身份验证失败",
-  [PERMISSION_DENIED]: "权限不足",
-  [NOT_FOUND]: "not found",
-  [ABORTED]: "找不到资源或资源已经存在",
-  [RESOURCE_EXHAUSTED]: "超过限额",
-  [CANCELLED]: "请求被客户端取消",
-  [INTERNAL]: "服务器内部错误",
-  [NOT_IMPLEMENTED]: "API方法未实现",
-  [UNAVAILABLE]: "服务不可用",
-  [DEADLINE_EXCEEDED]: "超出请求时限"
+  [OK]: 'OK',
+  [INVALID_ARGUMENT]: '无效参数',
+  [UNAUTHENTICATED]: '身份验证失败',
+  [PERMISSION_DENIED]: '权限不足',
+  [NOT_FOUND]: 'not found',
+  [ABORTED]: '找不到资源或资源已经存在',
+  [RESOURCE_EXHAUSTED]: '超过限额',
+  [CANCELLED]: '请求被客户端取消',
+  [INTERNAL]: '服务器内部错误',
+  [NOT_IMPLEMENTED]: 'API方法未实现',
+  [UNAVAILABLE]: '服务不可用',
+  [DEADLINE_EXCEEDED]: '超出请求时限',
 };
