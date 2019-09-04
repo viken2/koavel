@@ -65,5 +65,8 @@ src/*.js.map
 src/env.json
 doc/env/env.development.json
 
+doc/docs
+
 .idea/
 .vscode/
+.DS_Store
