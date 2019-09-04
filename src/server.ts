@@ -17,7 +17,7 @@ process.on('warning', (warning: Error) => {
 
 process.on('uncaughtException', (err: Error) => {
   logger.warn(err.message, {label: 'uncaughtException'});
-  // process.exit(1);
+  process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, p) => {
