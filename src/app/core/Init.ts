@@ -3,7 +3,8 @@ import * as fs from 'fs';
 import * as Router from 'koa-router';
 import { map as routerMap } from '../../router/index';
 import { Context } from 'koa';
-import bodyParser = require('koa-bodyparser');
+import * as bodyParser from 'koa-bodyparser';
+import * as KoaLogger from 'koa-logger';
 import BaseError from './BaseError';
 import config from '../../config/config';
 import { HTTP_OK, HTTP_ERROR } from '../../config/code';
@@ -25,6 +26,7 @@ const errorHandler = (app: any) => {
 };
 
 const initBase = (app: any) => {
+  app.use(KoaLogger());
   app.use(bodyParser());
 };
 
