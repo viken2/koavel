@@ -27,7 +27,7 @@ class UserController extends BaseController {
       true_name: 'haha',
       description: '',
       login_ip: '11',
-      status: UserModel.statusPending
+      status: UserModel.statusPending,
     });
     this.ctx.logger.info(user.id);
     this.success(user);
