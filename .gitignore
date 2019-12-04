@@ -35,7 +35,6 @@ typings
 .typingsrc
 dist
 dts
-lib
 temp
 es
 amd
