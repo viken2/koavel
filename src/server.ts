@@ -1,9 +1,9 @@
 import * as Koa from 'koa';
-import { initFun } from './app/core/Init';
+import { initSever } from './app/core/Init';
 import logger from './app/lib/LibLog';
 
 const app = new Koa();
-initFun(app);
+initSever(app);
 
 app.on('error', (err: Error) => {
   // err.stack
