@@ -1,14 +1,12 @@
 import jwt = require('jsonwebtoken');
 import config from '../../config/config';
 
-const HOUR = 60;
-
 export const jwtToken = (data: any) => {
   return jwt.sign({
     data,
   }, config.jwt.secret, {
     algorithm: 'HS256', // RS256
-    expiresIn: 2 * HOUR * HOUR, // 2h
+    expiresIn: config.jwt.expire, // 单位为秒
   });
 };
 
