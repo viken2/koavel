@@ -10,7 +10,7 @@ const Mysql = new Sequelize(config.mysql.name, config.mysql.user, config.mysql.p
   pool: {
     max: 100,
     min: 1,
-    idle: 10000,
+    idle: 10000, // 闲置连接回收时间, 10s
   },
   timezone: '+08:00',
   define: {

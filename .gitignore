@@ -62,9 +62,9 @@ src/**/*.js.map
 src/*.js.map
 
 src/env.json
-doc/env/env.development.json
+docs/env/env.development.json
 
-doc/docs
+docs/doc
 
 .idea/
 .vscode/

@@ -29,7 +29,7 @@ const logger: winston.Logger = winston.createLogger({
   transports: [
     new winston.transports.File({
       filename: path.join(config.log.path, 'error.log'),
-      level: 'error',
+      level: 'error', // 日志记录只需要记录error级别
     }),
     new winston.transports.File({
       filename: path.join(config.log.path, 'app.log'),

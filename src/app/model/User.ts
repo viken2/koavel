@@ -39,27 +39,27 @@ UserModel.init({
     allowNull: false,
   },
   email: {
-    type: new DataTypes.STRING(LEN),
+    type: DataTypes.STRING,
     allowNull: false,
   },
   password: {
-    type: new DataTypes.STRING(LEN),
+    type: DataTypes.STRING,
     allowNull: false,
   },
   phone: {
-    type: new DataTypes.STRING(LEN),
+    type: DataTypes.STRING,
     allowNull: false,
   },
   true_name: {
-    type: new DataTypes.STRING(LEN),
+    type: DataTypes.STRING,
     allowNull: false,
   },
   description: {
-    type: new DataTypes.STRING(LEN),
+    type: DataTypes.STRING,
     allowNull: false,
   },
   login_ip: {
-    type: new DataTypes.STRING(LEN),
+    type: DataTypes.STRING,
     allowNull: false,
   },
   status: {

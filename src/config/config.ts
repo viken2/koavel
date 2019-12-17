@@ -1,26 +1,16 @@
 import path = require('path');
 import fs = require('fs');
 
-interface Config {
-  key: string;
-  port: number;
-  env: string;
-  root: string;
-  log?: any;
-  jwt?: any;
-  mysql?: any;
-  redis?: any;
-}
-
 const root = path.resolve(path.dirname(__dirname));
-const envFile = path.join(root, 'env.json');
+const envFile = path.join(root, 'config/configmap', 'env.json');
 if (!fs.existsSync(envFile)) {
   throw new Error('env json not found');
 }
 const env = require(envFile);
 
-let config: Config = {
+const config: any = {
   key: env.env + '-' + env.key,
+  debug: env.debug || false,
   root,
   port: env.server_port,
   env: env.env || process.env.NODE_ENV,
@@ -32,7 +22,7 @@ config.log = {
 };
 
 config.mysql = {
-  name: 'falcon_ssp',
+  name: env.mysql.db,
   host: env.mysql.host,
   port: env.mysql.port,
   user: env.mysql.user,
@@ -51,6 +41,8 @@ config.redis = [
   },
 ];
 
-config.jwt = env.jwt;
+config.jwt = env.jwt || {};
+config.oidc = env.oidc || {};
+config.etcd = env.etcd || {};
 
 export default config;

@@ -1,10 +1,10 @@
 {
   "name": "koavel",
-  "version": "3.0.0",
+  "version": "2.0.0",
   "description": "a simple koa framework for node, the framework is based on typescript",
   "main": "/dist/app.js",
   "directories": {
-    "doc": "doc"
+    "doc": "docs"
   },
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
@@ -18,14 +18,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/viken2/koavel.git"
+    "url": "https://github.com/viken2/koavel.git"
   },
-  "keywords": [
-    "koa",
-    "typescript",
-    "framework",
-    "ioc"
-  ],
   "author": "viken2011@gmail.com",
   "engines": {
     "node": ">= 10.16.0"
@@ -36,29 +30,36 @@
   },
   "homepage": "https://github.com/viken2/koavel#readme",
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "@koa/cors": "^2.2.3",
+    "async-validator": "^3.2.3",
+    "bcryptjs": "^2.4.3",
     "inversify": "^5.0.1",
     "ioredis": "^4.14.1",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
+    "koa-helmet": "^5.2.0",
     "koa-logger": "^3.2.1",
     "koa-router": "^7.4.0",
     "mysql2": "^2.0.1",
+    "openid-client": "^3.9.0",
+    "path-to-regexp": "^6.1.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^5.21.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "@types/bcrypt": "^3.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/bluebird": "^3.5.29",
     "@types/ioredis": "^4.0.21",
     "@types/jsonwebtoken": "^8.3.5",
     "@types/koa": "^2.11.0",
     "@types/koa-bodyparser": "^4.3.0",
     "@types/koa-compose": "^3.2.5",
+    "@types/koa-helmet": "^3.1.2",
     "@types/koa-logger": "^3.1.1",
     "@types/koa-router": "^7.0.42",
+    "@types/koa__cors": "^2.2.3",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.14",
     "@types/sequelize": "^4.28.8",

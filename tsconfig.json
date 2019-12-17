@@ -5,7 +5,7 @@
         "types": ["mocha", "reflect-metadata"],
         "outDir": "./dist",
         "rootDir": "./src",
-        "sourceMap": true,
+        "sourceMap": false,
         "module": "commonjs",
         "moduleResolution": "node",
         "experimentalDecorators": true,
@@ -18,6 +18,7 @@
         "noUnusedParameters": false,
         "noUnusedLocals": true,
         "strictNullChecks": true,
+        "skipLibCheck": true,
     },
     "exclude": [
         "logs",
@@ -26,6 +27,6 @@
     ],
     "typedocOptions": {
         "mode": "modules",
-        "out": "docs"
+        "out": "docs/doc"
     }
 }

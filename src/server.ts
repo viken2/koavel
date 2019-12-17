@@ -1,5 +1,5 @@
 import * as Koa from 'koa';
-import { initSever } from './app/core/Init';
+import initSever from './app/core/Base';
 import logger from './app/lib/LibLog';
 
 const app = new Koa();

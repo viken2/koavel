@@ -4,6 +4,7 @@ import config from '../../config/config';
 import { Context } from 'koa';
 import { INVALID_ARGUMENT, UNAUTHENTICATED } from '../../config/code';
 import logger from '../lib/LibLog';
+import { throwError } from '../lib/Helpers';
 
 const APP_ID = '1';
 const APP_SECRET = 'fuckyou';
@@ -24,8 +25,8 @@ class ApiController extends BaseController
   public body: any;
   public rawBody: any;
 
-  public constructor(ctx: Context, app: any) {
-    super(ctx, app);
+  public constructor(ctx: Context) {
+    super(ctx);
     this.contentType = ctx.header['content-type'] || '';
     this.param = {...ctx.query};
     this.body = ctx.request.body;
@@ -40,28 +41,28 @@ class ApiController extends BaseController
 
   private checkApp() {
     if ([APP_ID].indexOf(this.param.app_id) === -1) {
-      this.throw(INVALID_ARGUMENT, 'app id not exist');
+      throwError(INVALID_ARGUMENT, 'app id not exist');
     }
   }
 
   private checkCallId() {
     const call_id = this.param.call_id;
     if (!call_id) {
-      this.throw(INVALID_ARGUMENT, 'call_id not found');
+      throwError(INVALID_ARGUMENT, 'call_id not found');
     }
   }
 
   private checkTime() {
     const time = this.param.rt;
     if (!time) {
-      this.throw(INVALID_ARGUMENT, 'rt not found');
+      throwError(INVALID_ARGUMENT, 'rt not found');
     }
   }
 
   private checkVersion() {
     const ver = this.param.ver;
     if (!ver) {
-      this.throw(INVALID_ARGUMENT, 'ver not found');
+      throwError(INVALID_ARGUMENT, 'ver not found');
     }
   }
 
@@ -73,7 +74,7 @@ class ApiController extends BaseController
 
     const sign = this.param.sign;
     if (!sign) {
-      this.throw(INVALID_ARGUMENT, 'sign not found or empty');
+      throwError(INVALID_ARGUMENT, 'sign not found or empty');
     }
 
     delete this.param.sign;
@@ -85,14 +86,14 @@ class ApiController extends BaseController
         param: this.param,
       }), {label: 'ApiController'});
 
-      this.throw(UNAUTHENTICATED, 'sign error');
+      throwError(UNAUTHENTICATED, 'sign error');
     }
   }
 
   private sign(param: any, algo = 'sha256') {
     const algos = ['sha256', 'md5'];
     if (algos.indexOf(algo) === -1) {
-      this.throw(UNAUTHENTICATED, 'algo error');
+      throwError(UNAUTHENTICATED, 'algo error');
     }
 
     let str = '';

@@ -3,6 +3,33 @@
 
 ## 目录结构
 ```node
+.
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── docs
+│   ├── db
+│   ├── debug
+│   └── env
+├── package-lock.json
+├── package.json
+├── src
+│   ├── app
+│   ├── app.ts
+│   ├── config
+│   ├── logs
+│   ├── router
+│   └── server.ts
+├── tsconfig.json
+├── tslint.json
+└── typedoc.json
 ```
 
 ## 启动方式
+
+```
+$ cp docs/env/env.example.json src/config/configmap/env.json
+$ vi src/config/configmap/env.json 然后修改对应配置
+$ npm run dev
+
+```
