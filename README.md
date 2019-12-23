@@ -28,8 +28,8 @@
 ## 启动方式
 
 ```
-$ cp docs/env/env.example.json src/config/configmap/env.json
-$ vi src/config/configmap/env.json 然后修改对应配置
+$ cp docs/env/env.example.json src/config/env.json
+$ vi src/config/env.json 然后修改对应配置
 $ npm run dev
 
 ```

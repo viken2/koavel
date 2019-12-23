@@ -2,7 +2,7 @@ import path = require('path');
 import fs = require('fs');
 
 const root = path.resolve(path.dirname(__dirname));
-const envFile = path.join(root, 'config/configmap', 'env.json');
+const envFile = path.join(root, 'config', 'env.json');
 if (!fs.existsSync(envFile)) {
   throw new Error('env json not found');
 }
