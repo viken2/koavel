@@ -2,7 +2,6 @@ import { Context } from 'koa';
 import config from '../../config/config';
 import { UNAUTHENTICATED } from '../../config/code';
 import { oidcVerify } from '../lib/LibOidc';
-import * as RepositoryUser from '../Repository/User';
 import { throwError, getToken } from '../lib/Helpers';
 
 module.exports = () => {
@@ -14,12 +13,7 @@ module.exports = () => {
     }
 
     await oidcVerify(token).then(async (user) => {
-      const info = await RepositoryUser.initUserByXid(user.id);
-      if (!info) {
-        throwError(UNAUTHENTICATED, 'Authentication Error: init');
-      }
-
-      ctx.uid = info.id;
+      ctx.uid = '123';
       ctx.user = user;
     }).catch((e) => {
       throwError(UNAUTHENTICATED, config.debug ? e.message : 'Authentication Error: token');
