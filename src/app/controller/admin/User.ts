@@ -1,5 +1,5 @@
 import BaseController from '../../core/BaseController';
-import { getUserList } from '../../Repository/User';
+import { getUserList } from '../../repository/User';
 import { PAGE_LIMIT } from '../../../config/app';
 
 class UserController extends BaseController {

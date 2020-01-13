@@ -1,7 +1,7 @@
 import BaseController from '../../core/BaseController';
 import UserModel from '../../model/User';
 import bcrypt = require('bcryptjs');
-import * as UserRepository from '../../Repository/User';
+import * as UserRepository from '../../repository/User';
 import { INVALID_ARGUMENT } from '../../../config/code';
 
 class UserController extends BaseController {
