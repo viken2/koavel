@@ -1,36 +1,34 @@
 import UserModel from '../model/User';
-import { Redis } from '../plugin/redis';
-import { PAGE_LIMIT } from '../../config/app';
 
-const prefix_uid = 'u';
+export const create = async (insert: any) => {
+  const set = await UserModel.create(insert);
+  return set;
+};
 
-export const getUserById = async(id: any) => {
-  const info = await Redis.hgetall(`${prefix_uid}:${id}`);
-  if (info && info.hasOwnProperty('id')) {
-    return info;
-  }
-  const user = await UserModel.findOne({
-    attributes: ['id', 'name', 'email', 'phone', 'password', 'status'],
+export const update = async (data: any, where: any) => {
+  const up = await UserModel.update(data, {
+    where,
+  });
+  return up;
+};
+
+export const info = async (id: number) => {
+  const user: any = await UserModel.findOne({
+    attributes: ['id', 'name'],
     where: {
       id,
     },
   });
-
-  if (user) {
-    const info = user.toJSON();
-    await Redis.hmset(`${prefix_uid}:${id}`, info);
-    return info;
-  }
-
-  return null;
+  return user;
 };
 
-export const getUserList = async(where: any = {}, page: number = 1, size: number = PAGE_LIMIT) => {
-  return await UserModel.findAndCountAll({
-    attributes: ['id', 'name', 'email', 'phone', 'status'],
+export const list = async (where: any, page: number, size: number) => {
+  const res = await UserModel.findAndCountAll({
+    attributes: ['id', 'name'],
     limit: size,
     offset: (page - 1) * size,
     order: [['id', 'DESC']],
-    where: where || {},
+    where,
   });
+  return res;
 };

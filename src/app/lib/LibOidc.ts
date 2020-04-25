@@ -1,9 +1,9 @@
-import { Issuer,custom } from 'openid-client';
+import { Issuer, custom } from 'openid-client';
 import config from '../../config/config';
 
 custom.setHttpOptionsDefaults({
   followRedirect: false,
-  headers: { 'User-Agent': 'koaval-curl' },
+  headers: { 'User-Agent': 'xl-falcon-ssp' },
   timeout: 5000,
   retry: 3,
   throwHttpErrors: false,

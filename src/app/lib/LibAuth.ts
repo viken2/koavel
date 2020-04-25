@@ -6,6 +6,6 @@ export const hash = (str: string) => {
   return bcrypt.hashSync(str, salt);
 };
 
-export const hasCheck = (str: string, hash: string) => {
+export const hashCheck = (str: string, hash: string) => {
   return bcrypt.compareSync(str, hash);
 };

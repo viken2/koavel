@@ -2,6 +2,8 @@ import { Context } from 'koa';
 import logger from '../lib/LibLog';
 import { ERR_MSG, HTTP_OK, OK, INVALID_ARGUMENT } from '../../config/code';
 import schema from 'async-validator';
+import xlsx from 'node-xlsx';
+import { arrayColumn, ObjectValues } from '../lib/Helpers';
 
 class BaseController {
   public ctx: any;
@@ -38,6 +40,17 @@ class BaseController {
     });
   }
 
+  public down(title: any, data: any) {
+    const downdata = arrayColumn(data, Object.keys(title));
+    downdata.unshift(ObjectValues(title));
+
+    const buffer = xlsx.build([{ name: '数据', data: downdata }]);
+    this.ctx.status = HTTP_OK;
+    this.ctx.body = buffer;
+    this.ctx.set('content-type', 'application/octet-stream');
+    this.ctx.attachment(`数据导出-${new Date().getTime()}.xlsx`);
+  }
+
   public async validate(data: any, descriptor: any) {
     const validator = new schema(descriptor);
     return new Promise((resolve, reject) => {
@@ -53,13 +66,14 @@ class BaseController {
     const insert: any = {};
     for (const key in descriptor) {
       if (descriptor.hasOwnProperty(key)) {
-        insert[key] = data[key] || null;
+        insert[key] = data.hasOwnProperty(key) ? data[key] : null;
       }
     }
 
-    const valid = await this.validate(insert, descriptor);
+    const valid: any = await this.validate(insert, descriptor);
     if (valid !== true) {
-      this.error(INVALID_ARGUMENT, JSON.stringify(valid));
+      // this.error(INVALID_ARGUMENT, JSON.stringify(valid));
+      this.error(INVALID_ARGUMENT, valid[0].message);
       return false;
     }
 
@@ -81,9 +95,10 @@ class BaseController {
       return false;
     }
 
-    const valid = await this.validate(update, descriptor);
+    const valid: any = await this.validate(update, descriptor);
     if (valid !== true) {
       this.error(INVALID_ARGUMENT, JSON.stringify(valid));
+      // this.error(INVALID_ARGUMENT, valid[0].message);
       return false;
     }
 

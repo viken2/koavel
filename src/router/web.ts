@@ -1,5 +1,6 @@
 module.exports = {
-  group: '/web',
+  group: 'web',
+  prefix: 'web',
   middleware: [],
   router: {
     // 用户

@@ -1,8 +1,9 @@
 module.exports = {
-  group: '/api',
-  middleware: [], // jwtAuth apiAuth
+  group: 'api',
+  prefix: 'api',
+  middleware: ['apiAuth'], // jwtAuth apiAuth
   router: {
-    'post /api/test/save': 'TestApi@save',
-    'get /api/test/list': 'TestApi@list',
+    'post /test/save': 'TestApi@save',
+    'get /test/list': 'TestApi@list',
   },
 };

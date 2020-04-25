@@ -1,6 +1,6 @@
-import ApiController from '../../core/ApiController';
+import BaseController from '../../core/BaseController';
 
-class TestApi extends ApiController {
+class TestApi extends BaseController {
   public async list() {
     this.success([{id: 1}, {id: 2}]);
   }

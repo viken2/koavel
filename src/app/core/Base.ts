@@ -10,19 +10,36 @@ import BaseError from './BaseError';
 import config from '../../config/config';
 import { HTTP_OK, HTTP_ERROR } from '../../config/code';
 import { pathToRegexp } from 'path-to-regexp';
+import { UniqueConstraintError, BaseError as SequelizeError } from 'sequelize';
+import logger from '../lib/LibLog';
+import { dingAlert } from '../lib/Helpers';
 
 const errorHandler = (app: any) => {
   app.use(async (ctx: Context, next: Function) => {
     await next().catch((e: BaseError) => {
+      let message = e.message;
+      if (e instanceof UniqueConstraintError) {
+        message = config.debug ? e.original.message : '接口异常，请稍后再试';
+      } else if (e instanceof SequelizeError) {
+        message = config.debug ? e.message : '接口异常，请稍后再试';
+      }
+
       ctx.status = HTTP_OK;
       ctx.type = 'application/json; charset=utf-8';
       ctx.body = {
         code: (e.code && typeof e.code === 'number') ? e.code : HTTP_ERROR,
-        error: e.message,
+        error: message,
       };
 
       if (!e.code || e.code >= HTTP_ERROR) {
-        app.emit('error', e);
+        dingAlert(`请求：${ctx.url}，错误：${message}`);
+        logger.error({
+          url: ctx.url,
+          method: ctx.method,
+          body: ctx.request.body,
+          error: message,
+          stack: e.stack,
+        });
       }
     });
   });
@@ -33,6 +50,9 @@ const initBase = (app: any) => {
   app.use(KoaCors());
   app.use(helmet());
   app.use(bodyParser());
+};
+
+const confRouter = (app: any) => {
 };
 
 const initRouter = (app: any) => {
@@ -52,24 +72,34 @@ const initRouter = (app: any) => {
     }
 
     const group = routerCnf.group;
+    const prefix = routerCnf.prefix || '';
     const routes = routerCnf.router;
+
     for (const key in routes) {
       if (routes.hasOwnProperty(key)) {
         const item = routes[key];
-        const [method, route] = key.split(' ');
+        const [methodOld, route] = key.split(' ');
+        const method = methodOld.toLocaleLowerCase();
         const [controllerName, fun] = item.split('@');
         if (routerCnf.middleware && routerCnf.middleware.length > 0) {
-          routeMiddles[key] = routerCnf.middleware;
+          let mk = method;
+          if (prefix) {
+            mk += ' /' + prefix;
+          } else {
+            mk += ' ';
+          }
+          mk += route;
+          routeMiddles[mk] = routerCnf.middleware;
         }
 
         const controllerFile = path.join(config.root, 'app/controller', group, controllerName);
         if (!fs.existsSync(`${controllerFile}.js`) && !fs.existsSync(`${controllerFile}.ts`)) {
-          return;
+          continue;
         }
 
-        const controllerObj = require(controllerFile);
-        Reflect.apply(Reflect.get(router, method), router, [route, (ctx: Context, next: any) => {
-          const controller = new controllerObj(ctx);
+        const ObjController = require(controllerFile);
+        Reflect.apply(Reflect.get(router, method), router, [prefix ? '/' + prefix + route : route, (ctx: Context, next: any) => {
+          const controller = new ObjController(ctx);
           if (!Reflect.has(controller, fun)) {
             return;
           }
@@ -107,8 +137,9 @@ const initRouter = (app: any) => {
 
     for (const middleware of routeMiddles[key]) {
       const fun = require(path.join(config.root, 'app/middleware', middleware))();
-      await fun(ctx, next);
+      await fun(ctx, async () => {});
     }
+    await next();
   });
 
   app.use(router.routes()).use(router.allowedMethods());
@@ -117,5 +148,6 @@ const initRouter = (app: any) => {
 export default (app: any): void => {
   errorHandler(app);
   initBase(app);
+  confRouter(app);
   initRouter(app);
 };

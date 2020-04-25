@@ -1,9 +1,8 @@
 import { Sequelize } from 'sequelize';
 import config from '../../config/config';
 
-// const sequelize = new Sequelize('mysql://root:asd123@localhost:3306/mydb');
 const Mysql = new Sequelize(config.mysql.name, config.mysql.user, config.mysql.password, {
-  logging: config.env !== 'production' ? console.log : false,
+  logging: config.debug ? console.log : false,
   dialect: 'mysql',
   host: config.mysql.host,
   port: config.mysql.port,

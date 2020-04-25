@@ -1,7 +1,7 @@
 import jwt = require('jsonwebtoken');
 import config from '../../config/config';
 
-const EXPIRE_TIME = 600; // 默认10分钟
+const EXPIRE_TIME = 7200; // 默认2小时
 
 export const jwtToken = (data: any) => {
   return jwt.sign({
@@ -22,4 +22,7 @@ export const jwtVerify = (token: string) => {
       resolve(decoded);
     });
   });
+};
+
+export const jwtRefresh = (token: string) => {
 };

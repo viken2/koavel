@@ -11,7 +11,7 @@ class UserController extends BaseController {
       this.error(INVALID_ARGUMENT);
       return;
     }
-    const info = await UserRepository.getUserById(id);
+    const info = await UserRepository.info(id);
     this.success(info);
   }
 
@@ -25,10 +25,6 @@ class UserController extends BaseController {
       name: '测试用户' + Math.ceil(Math.random() * N),
       email: 'test@test.com',
       password: hash,
-      phone: '123',
-      true_name: 'haha',
-      description: '',
-      login_ip: '127.0.0.1',
       status: UserModel.statusPending,
     });
     this.ctx.logger.info(user.id);

@@ -17,12 +17,12 @@ const config: any = {
 };
 
 config.log = {
-  level: 'debug',
+  level: config.debug ? 'debug' : 'info',
   path: path.join(root, 'logs'),
 };
 
 config.mysql = {
-  name: env.mysql.db,
+  name: 'xxx',
   host: env.mysql.host,
   port: env.mysql.port,
   user: env.mysql.user,
@@ -43,6 +43,12 @@ config.redis = [
 
 config.jwt = env.jwt || {};
 config.oidc = env.oidc || {};
+config.sso = env.sso || {};
 config.etcd = env.etcd || {};
+config.admin = env.admin || {};
+
+config.ssoAuth = {
+  exclude: [/^\/login$/, /^\/logout$/, /^\/token$/],
+};
 
 export default config;
