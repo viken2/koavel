@@ -62,12 +62,12 @@ export const unique = (data: any) => {
   return Array.from(new Set(data));
 };
 
-export const formatInt = (data: any) => {
+export const formatInt = <T>(data: Array<T>): Array<T> => {
   if (!data || !Array.isArray(data)) {
     return [];
   }
 
-  return data.map((item: any) => item >> 0).filter((item: any) => item > 0);
+  return data.filter((item: any) => (item >> 0) > 0);
 };
 
 export const queryPageAndSize = (ctx: Context) => {

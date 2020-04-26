@@ -43,6 +43,7 @@
     "koa-router": "^8.0.8",
     "mysql2": "^2.1.0",
     "node-xlsx": "^0.15.0",
+    "openid-client": "^3.14.2",
     "path-to-regexp": "^6.1.0",
     "performant-array-to-tree": "^1.7.1",
     "reflect-metadata": "^0.1.13",

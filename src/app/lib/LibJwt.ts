@@ -14,7 +14,7 @@ export const jwtToken = (data: any) => {
 
 export const jwtVerify = (token: string) => {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, config.jwt.secret, (err: Error, decoded: any) => {
+    jwt.verify(token, config.jwt.secret, (err: jwt.VerifyErrors, decoded: object | undefined) => {
       if (err) {
         reject(err);
         return;
